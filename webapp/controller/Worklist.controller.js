@@ -1,4 +1,5 @@
 /*global location history */
+/*eslint .eslintrc.json*/
 sap.ui.define([
 		"sidorovichApp2/sidorovichApp2/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
@@ -7,8 +8,10 @@ sap.ui.define([
 		"sap/ui/model/FilterOperator",
 		"sap/ui/model/Sorter",
 		"sap/m/MessageBox",
-		"sap/m/MessageToast"
-	], function (BaseController, JSONModel, formatter, Filter, FilterOperator, Sorter, MessageBox, MessageToast) {
+		"sap/m/MessageToast",
+		"sap/ui/core/Fragment"
+
+	], function (BaseController, JSONModel, formatter, Filter, FilterOperator, Sorter, MessageBox, MessageToast, Fragment) {
 		"use strict";
 
 		return BaseController.extend("sidorovichApp2.sidorovichApp2.controller.Worklist", {
@@ -72,11 +75,7 @@ sap.ui.define([
 				});
 			},
 			
-			onPressRefresh: function(){
-				this._bindTable();
-				var msg = this.getResourceBundle().getText("refreshMessage");
-				MessageToast.show(msg);
-			},
+			
 			
 			_getTableTemplate: function(){
 				var oTemplate = new sap.m.ColumnListItem({
@@ -135,13 +134,34 @@ sap.ui.define([
 				}.bind(this)
 				});
 			},
+			
+			onPressRefresh: function(){
+				this._bindTable();
+				var msg = this.getResourceBundle().getText("refreshMessage");
+				MessageToast.show(msg);
+			},
+			
+			onPressCreate: function(){
+				this._loadCreateDialog();
+			},
+			
+			_loadCreateDialog: async function() {
+			    this._oDialog ??= await Fragment.load({
+			        name: "sidorovichApp2.sidorovichApp2.view.fragment.CreateDialog",
+			        controller: this, 
+			        id: "createDialog"
+			    });
+    			this.getView().addDependent(this._oDialog);
+    			this._oDialog.open();
+			},
+ 
+
+			
 			onUpdateFinished : function (oEvent) {
-				// update the worklist's object counter after the table update
 				var sTitle,
 					oTable = oEvent.getSource(),
 					iTotalItems = oEvent.getParameter("total");
-				// only update the counter if the length is final and
-				// the table is not empty
+
 				if (iTotalItems && oTable.getBinding("items").isLengthFinal()) {
 					sTitle = this.getResourceBundle().getText("worklistTableTitleCount", [iTotalItems]);
 				} else {
@@ -150,21 +170,11 @@ sap.ui.define([
 				this.getModel("worklistView").setProperty("/worklistTableTitle", sTitle);
 			},
 
-			/**
-			 * Event handler when a table item gets pressed
-			 * @param {sap.ui.base.Event} oEvent the table selectionChange event
-			 * @public
-			 */
+
 			onPress : function (oEvent) {
-				// The source is the list item that got pressed
 				this._showObject(oEvent.getSource());
 			},
 
-			/**
-			 * Event handler for navigating back.
-			 * We navigate back in the browser historz
-			 * @public
-			 */
 			onNavBack : function() {
 				history.go(-1);
 			},
@@ -172,10 +182,7 @@ sap.ui.define([
 
 			onSearch : function (oEvent) {
 				if (oEvent.getParameters().refreshButtonPressed) {
-					// Search field's 'refresh' button has been pressed.
-					// This is visible if you select any master list item.
-					// In this case no new search is triggered, we only
-					// refresh the list binding.
+
 					this.onRefresh();
 				} else {
 					var aTableSearchState = [];
@@ -189,42 +196,24 @@ sap.ui.define([
 
 			},
 
-			/**
-			 * Event handler for refresh event. Keeps filter, sort
-			 * and group settings and refreshes the list binding.
-			 * @public
-			 */
+
 			onRefresh : function () {
 				var oTable = this.byId("table");
 				oTable.getBinding("items").refresh();
 			},
 
-			/* =========================================================== */
-			/* internal methods                                            */
-			/* =========================================================== */
 
-			/**
-			 * Shows the selected item on the object page
-			 * On phones a additional history entry is created
-			 * @param {sap.m.ObjectListItem} oItem selected Item
-			 * @private
-			 */
 			_showObject : function (oItem) {
 				this.getRouter().navTo("object", {
 					objectId: oItem.getBindingContext().getProperty("ID")
 				});
 			},
 
-			/**
-			 * Internal helper method to apply both filter and search state together on the list binding
-			 * @param {sap.ui.model.Filter[]} aTableSearchState An array of filters for the search
-			 * @private
-			 */
+
 			_applySearch: function(aTableSearchState) {
 				var oTable = this.byId("table"),
 					oViewModel = this.getModel("worklistView");
 				oTable.getBinding("items").filter(aTableSearchState, "Application");
-				// changes the noDataText of the list in case there are no filter results
 				if (aTableSearchState.length !== 0) {
 					oViewModel.setProperty("/tableNoDataText", this.getResourceBundle().getText("worklistNoDataWithSearchText"));
 				}

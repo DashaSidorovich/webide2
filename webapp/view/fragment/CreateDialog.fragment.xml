@@ -1,0 +1,48 @@
+<core:FragmentDefinition
+   xmlns="sap.m"
+   xmlns:core="sap.ui.core">
+    <Dialog>
+      id="createDialog"
+      title="{i18n>createDialogTitle}"
+      <content>
+      	<VBox>
+      	<VBox>
+      		<Label labelFor="idDocumentNumber"/>
+      		<Input value="{DocumentNumber}" id="idDocumentNumber"/>
+      	</VBox>
+      	<VBox>
+      		<Label labelFor="idDescription"/>
+      		<TextArea value="{Description}" id="idDescription"
+      		maxLength="256" rows="3"/>
+      	</VBox>
+      	<VBox>
+      		<Label labelFor="idPlantText"/>
+      		<Input value="{PlantText}" id="idPlantText" maxLength="64"/>
+      	</VBox>
+      	<VBox>
+      		<Label labelFor="idRegionText"/>
+      		<Input value="{RegionText}" id="idRegionText" maxLength="64"/>
+      	</VBox>
+      	<VBox>
+      		<Label labelFor="idHeaderID"/>
+			<DatePicker id="idDatePicker"
+			value="{'path':'/valueDatePicker',
+					'type':'sap.ui.model.type.Date',
+					'formatOptions': {
+					'pattern': 'yyyy-MM-dd'}
+				   }"
+			change="handleChange"
+			class="sapUiSmallMarginBottom"/>      	
+		</VBox>
+      </VBox>
+      </content>
+      <beginButton>
+      	<Button type="Emphasized" press="onPressSave" text="{i18n>saveButton}"/>
+      </beginButton>
+      <endButton>
+      	<Button type="Transparent" press="onPressCancel" text="{i18n>cancelButton}"/>
+      </endButton>
+    </Dialog>
+      
+      
+</core:FragmentDefinition>

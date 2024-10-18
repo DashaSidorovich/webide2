@@ -37,6 +37,12 @@
 						</SearchField>
 						<ToolbarSpacer />
 						<Button
+							icon='sap-icon://add'
+							type='Emphasized'
+							press='onPressCreate'
+							tooltip='Create'
+						/>
+						<Button
 							icon='sap-icon://refresh'
 							type='Transparent'
 							press='onPressRefresh'
