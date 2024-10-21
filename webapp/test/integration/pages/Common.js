@@ -4,7 +4,7 @@ sap.ui.define([
 		"use strict";
 
 		function getFrameUrl (sHash, sUrlParameters) {
-			var sUrl = jQuery.sap.getResourcePath("sidorovichApp2/sidorovichApp2/app", ".html");
+			var sUrl = jQuery.sap.getResourcePath("zjblessons/sidorovichApp2/app", ".html");
 			sUrlParameters = sUrlParameters ? "?" + sUrlParameters : "";
 
 			if (sHash) {
@@ -16,7 +16,7 @@ sap.ui.define([
 			return sUrl + sUrlParameters + sHash;
 		}
 
-		return Opa5.extend("sidorovichApp2.sidorovichApp2.test.integration.pages.Common", {
+		return Opa5.extend("zjblessons.sidorovichApp2.test.integration.pages.Common", {
 
 			iStartMyApp : function (oOptions) {
 				var sUrlParameters;
@@ -56,7 +56,7 @@ sap.ui.define([
 
 			getMockServer : function () {
 				return new Promise(function (success) {
-					Opa5.getWindow().sap.ui.require(["sidorovichApp2/sidorovichApp2/localService/mockserver"], function (mockserver) {
+					Opa5.getWindow().sap.ui.require(["zjblessons/sidorovichApp2/localService/mockserver"], function (mockserver) {
 						success(mockserver.getMockServer());
 					});
 				});

@@ -1,38 +1,38 @@
 <core:FragmentDefinition
    xmlns="sap.m"
-   xmlns:core="sap.ui.core">
-    <Dialog>
-      id="createDialog"
+   xmlns:core="sap.ui.core"
+
+   >
+    <Dialog id="createDialog"
       title="{i18n>createDialogTitle}"
+      class="sapUiContentPadding"
+      beforeOpen="onDialogBeforeOpen">
+      
       <content>
       	<VBox>
       	<VBox>
-      		<Label labelFor="idDocumentNumber"/>
-      		<Input value="{DocumentNumber}" id="idDocumentNumber"/>
+      		<Label labelFor="idDocumentNumber" text="{i18n>labelDocumentNumber}"/>
+      		<Input value="{path: 'DocumentNumber', mode: 'TwoWay'}" id="idDocumentNumber"/>
       	</VBox>
       	<VBox>
-      		<Label labelFor="idDescription"/>
-      		<TextArea value="{Description}" id="idDescription"
+      		<Label labelFor="idDescription"  text="{i18n>labelDescription}"/>
+      		<TextArea value="{path: 'Description', mode: 'TwoWay'}" id="idDescription" width="100%"
       		maxLength="256" rows="3"/>
       	</VBox>
       	<VBox>
-      		<Label labelFor="idPlantText"/>
-      		<Input value="{PlantText}" id="idPlantText" maxLength="64"/>
+      		<Label labelFor="idPlantText"  text="{i18n>labelPlantText}"/>
+      		<TextArea value="{path: 'PlantText', mode: 'TwoWay'}" id="idPlantText" maxLength="64" rows="2" width="100%"/>
       	</VBox>
       	<VBox>
-      		<Label labelFor="idRegionText"/>
-      		<Input value="{RegionText}" id="idRegionText" maxLength="64"/>
+      		<Label labelFor="idRegionText"  text="{i18n>labelRegionText}"/>
+      		<TextArea value="{path: 'RegionText', mode: 'TwoWay'}" id="idRegionText" maxLength="64" rows="2" width="100%"/>
       	</VBox>
       	<VBox>
-      		<Label labelFor="idHeaderID"/>
+      		<Label labelFor="idDatePicker"  text="{i18n>labelDocumentDate}"/>
 			<DatePicker id="idDatePicker"
-			value="{'path':'/valueDatePicker',
-					'type':'sap.ui.model.type.Date',
-					'formatOptions': {
-					'pattern': 'yyyy-MM-dd'}
-				   }"
-			change="handleChange"
-			class="sapUiSmallMarginBottom"/>      	
+			    value="{path: 'DocumentDate', mode: 'TwoWay'}"
+			    valueFormat="yyyy-MM-ddTHH:mm:ss" 
+			    displayFormat="dd.MM.yyyy"/>
 		</VBox>
       </VBox>
       </content>

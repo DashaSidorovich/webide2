@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="sidorovichApp2.sidorovichApp2.controller.Worklist"
+	controllerName="zjblessons.sidorovichApp2.controller.Worklist"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic">
@@ -29,10 +29,10 @@
 					<Toolbar>
 						<Title id="tableHeader" text="{worklistView>/sCount} records"/>
 						<SearchField
-							id="searchFieldDocumentNumber"
+							id="searchField"
 							tooltip="{i18n>worklistSearchTooltip}"
-							search="onFilterPostsDocumentNumber"
-							placeholder="{i18n>searchFieldPlaceholderDocumentNumber}"
+							search="onSearch"
+							placeholder="{i18n>searchFieldPlaceholder}"
 							width="25%">
 						</SearchField>
 						<ToolbarSpacer />

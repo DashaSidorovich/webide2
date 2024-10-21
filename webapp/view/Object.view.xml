@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="sidorovichApp2.sidorovichApp2.controller.Object"
+	controllerName="zjblessons.sidorovichApp2.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic">

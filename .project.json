@@ -52,8 +52,8 @@
     "resourceModelName": "i18n"
   },
   "mockpreview": {
-    "mockUri": "/jetCloud/apps/zjblessons/jblesson02/v01/01.xsodata",
-    "metadataFilePath": "",
+    "mockUri": "/jetCloud/apps/zjblessons/jblesson02/v01/01.xsodata/",
+    "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,
     "mockRequestsFilePath": ""

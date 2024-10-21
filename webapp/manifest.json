@@ -1,7 +1,7 @@
 {
 	"_version": "1.9.0",
 	"sap.app": {
-		"id": "sidorovichApp2.sidorovichApp2",
+		"id": "zjblessons.sidorovichApp2",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"title": "{{appTitle}}",
@@ -42,7 +42,7 @@
 	},
 	"sap.ui5": {
 		"rootView": {
-			"viewName": "sidorovichApp2.sidorovichApp2.view.App",
+			"viewName": "zjblessons.sidorovichApp2.view.App",
 			"type": "XML",
 			"async": true,
 			"id": "app"
@@ -63,7 +63,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "sidorovichApp2.sidorovichApp2.i18n.i18n"
+					"bundleName": "zjblessons.sidorovichApp2.i18n.i18n"
 				}
 			},
 			"": {
@@ -75,7 +75,7 @@
 			"config": {
 				"routerClass": "sap.m.routing.Router",
 				"viewType": "XML",
-				"viewPath": "sidorovichApp2.sidorovichApp2.view",
+				"viewPath": "zjblessons.sidorovichApp2.view",
 				"controlId": "app",
 				"controlAggregation": "pages",
 				"bypassed": {

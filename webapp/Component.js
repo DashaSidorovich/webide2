@@ -2,12 +2,12 @@
 sap.ui.define([
 		"sap/ui/core/UIComponent",
 		"sap/ui/Device",
-		"sidorovichApp2/sidorovichApp2/model/models",
-		"sidorovichApp2/sidorovichApp2/controller/ErrorHandler"
+		"zjblessons/sidorovichApp2/model/models",
+		"zjblessons/sidorovichApp2/controller/ErrorHandler"
 	], function (UIComponent, Device, models, ErrorHandler) {
 		"use strict";
 
-		return UIComponent.extend("sidorovichApp2.sidorovichApp2.Component", {
+		return UIComponent.extend("zjblessons.sidorovichApp2.Component", {
 
 			metadata : {
 				manifest: "json"

@@ -7,25 +7,25 @@ QUnit.config.autostart = false;
 
 sap.ui.require([
 	"sap/ui/test/Opa5",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/Common",
+	"zjblessons/sidorovichApp2/test/integration/pages/Common",
 	"sap/ui/test/opaQunit",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/Worklist",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/Object",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/NotFound",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/Browser",
-	"sidorovichApp2/sidorovichApp2/test/integration/pages/App"
+	"zjblessons/sidorovichApp2/test/integration/pages/Worklist",
+	"zjblessons/sidorovichApp2/test/integration/pages/Object",
+	"zjblessons/sidorovichApp2/test/integration/pages/NotFound",
+	"zjblessons/sidorovichApp2/test/integration/pages/Browser",
+	"zjblessons/sidorovichApp2/test/integration/pages/App"
 ], function (Opa5, Common) {
 	"use strict";
 	Opa5.extendConfig({
 		arrangements: new Common(),
-		viewNamespace: "sidorovichApp2.sidorovichApp2.view."
+		viewNamespace: "zjblessons.sidorovichApp2.view."
 	});
 
 	sap.ui.require([
-		"sidorovichApp2/sidorovichApp2/test/integration/WorklistJourney",
-		"sidorovichApp2/sidorovichApp2/test/integration/ObjectJourney",
-		"sidorovichApp2/sidorovichApp2/test/integration/NavigationJourney",
-		"sidorovichApp2/sidorovichApp2/test/integration/NotFoundJourney"
+		"zjblessons/sidorovichApp2/test/integration/WorklistJourney",
+		"zjblessons/sidorovichApp2/test/integration/ObjectJourney",
+		"zjblessons/sidorovichApp2/test/integration/NavigationJourney",
+		"zjblessons/sidorovichApp2/test/integration/NotFoundJourney"
 	], function () {
 		QUnit.start();
 	});

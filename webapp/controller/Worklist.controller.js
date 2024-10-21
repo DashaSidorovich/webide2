@@ -1,9 +1,9 @@
 /*global location history */
 /*eslint .eslintrc.json*/
 sap.ui.define([
-		"sidorovichApp2/sidorovichApp2/controller/BaseController",
+		"zjblessons/sidorovichApp2/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"sidorovichApp2/sidorovichApp2/model/formatter",
+		"zjblessons/sidorovichApp2/model/formatter",
 		"sap/ui/model/Filter",
 		"sap/ui/model/FilterOperator",
 		"sap/ui/model/Sorter",
@@ -14,7 +14,7 @@ sap.ui.define([
 	], function (BaseController, JSONModel, formatter, Filter, FilterOperator, Sorter, MessageBox, MessageToast, Fragment) {
 		"use strict";
 
-		return BaseController.extend("sidorovichApp2.sidorovichApp2.controller.Worklist", {
+		return BaseController.extend("zjblessons.sidorovichApp2.controller.Worklist", {
 
 			formatter: formatter,
 
@@ -26,7 +26,7 @@ sap.ui.define([
 
 				iOriginalBusyDelay = oTable.getBusyIndicatorDelay();
 				this._aTableSearchState = [];
-
+				this.oDatePicker = this.byId("idDatePicker");
 				oViewModel = new JSONModel({
 					sCount: '0',
 					worklistTableTitle : this.getResourceBundle().getText("worklistTableTitle"),
@@ -147,15 +147,64 @@ sap.ui.define([
 			
 			_loadCreateDialog: async function() {
 			    this._oDialog ??= await Fragment.load({
-			        name: "sidorovichApp2.sidorovichApp2.view.fragment.CreateDialog",
+			        name: "zjblessons.sidorovichApp2.view.fragment.CreateDialog",
 			        controller: this, 
 			        id: "createDialog"
-			    });
-    			this.getView().addDependent(this._oDialog);
-    			this._oDialog.open();
+			    }).then(oDialog => {
+			    	this.getView().addDependent(this.oDialog);
+			    	oDialog.setModel(this.getView().getModel("i18n"), "i18n");
+			    	return oDialog;
+				});
+				
+				
+				this._oDialog.open();
+			},
+
+			onPressSave: function(oEvent){
+				const oContext = this._oDialog.getBindingContext();
+			    console.log(oContext.getObject());
+			
+			    const oDatePicker = Fragment.byId("createDialog", "idDatePicker");
+			    const oDocumentDate = oDatePicker.getDateValue();
+			
+			    if (oDocumentDate) {
+			        oContext.setProperty("DocumentDate", oDocumentDate); 
+			    }
+				this.getModel().submitChanges({
+					success: () => {
+						var msg = this.getResourceBundle().getText("successCreate");
+						MessageToast.show(msg);
+						console.log(oContext.getObject());
+						this._bindTable();
+					}
+				});
+				console.log("DocumentDate:", oContext.getProperty('DocumentDate'));
+
+				this._oDialog.close();
+			},
+			onPressCancel: function(){
+				this.getModel().resetChanges();
+				this._oDialog.close();
 			},
  
+			onDialogBeforeOpen: function(oEvent){
+				    console.log("Dialog beforeOpen event triggered");
 
+				const oDialog = oEvent.getSource();
+				
+				const oParams = {
+					Version: "A",
+					HeaderID: "0",
+					Created: new Date()
+				},
+				
+				oEntry=this.getModel().createEntry('/zjblessons_base_Headers', {
+					properties: oParams
+				});
+				
+				oDialog.setBindingContext(oEntry);
+				oDialog.setModel(this.getModel()); 
+			},
 			
 			onUpdateFinished : function (oEvent) {
 				var sTitle,

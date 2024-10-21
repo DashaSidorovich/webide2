@@ -1,9 +1,9 @@
 /*global location*/
 sap.ui.define([
-		"sidorovichApp2/sidorovichApp2/controller/BaseController",
+		"zjblessons/sidorovichApp2/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
-		"sidorovichApp2/sidorovichApp2/model/formatter"
+		"zjblessons/sidorovichApp2/model/formatter"
 	], function (
 		BaseController,
 		JSONModel,
@@ -12,7 +12,7 @@ sap.ui.define([
 	) {
 		"use strict";
 
-		return BaseController.extend("sidorovichApp2.sidorovichApp2.controller.Object", {
+		return BaseController.extend("zjblessons.sidorovichApp2.controller.Object", {
 
 			formatter: formatter,
 

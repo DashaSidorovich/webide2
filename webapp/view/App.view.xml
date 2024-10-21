@@ -1,6 +1,6 @@
 <mvc:View
 	xmlns:mvc="sap.ui.core.mvc"
-	controllerName="sidorovichApp2.sidorovichApp2.controller.App"
+	controllerName="zjblessons.sidorovichApp2.controller.App"
 	displayBlock="true"
 	xmlns="sap.m">
 
