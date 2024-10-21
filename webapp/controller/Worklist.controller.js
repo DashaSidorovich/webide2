@@ -206,6 +206,33 @@ sap.ui.define([
 				oDialog.setModel(this.getModel()); 
 			},
 			
+			onFilterDateRange: function(oEvent) {
+			    const oDateRange = oEvent.getSource();
+			    const oDateFrom = oDateRange.getFrom();
+			    const oDateTo = oDateRange.getTo();
+			
+			    if (oDateFrom && oDateTo) {
+			        const oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "yyyy-MM-ddTHH:mm:ss"});
+			        const sFormattedDateFrom = oDateFormat.format(oDateFrom);
+			        const sFormattedDateTo = oDateFormat.format(oDateTo);
+			
+			        const oTable = this.byId("table");
+			        const oBinding = oTable.getBinding("items");
+			
+			        oBinding.filter(new sap.ui.model.Filter({
+			           path: "DocumentDate",
+			           operator: sap.ui.model.FilterOperator.BT, 
+			           value1: sFormattedDateFrom,
+			           value2: sFormattedDateTo
+			        }));
+			    }
+			    else {
+			    	const oTable = this.byId("table");
+			        const oBinding = oTable.getBinding("items");
+			    	oBinding.filter([]);
+			    }
+			},
+			
 			onUpdateFinished : function (oEvent) {
 				var sTitle,
 					oTable = oEvent.getSource(),
