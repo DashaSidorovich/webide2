@@ -83,6 +83,13 @@ sap.ui.define([
 				return sSelectedKey === filterName ? [] : [new Filter('Version', FilterOperator.EQ, 'D')]
 			},
 			
+			onItemSelect(oEvent){
+				const oSelectedItem = oEvent.getParameter('listItem'),
+					sHeaderID = oSelectedItem.getBindingContext().getProperty('HeaderID');
+					this.getRouter().navTo("object", {
+					objectId: sHeaderID
+				});
+			},
 			_getTableTemplate: function(){
 				var oTemplate = new sap.m.ColumnListItem({
 					highlight: "{= ${Version} === 'A' ? 'Success' : 'Error'}",

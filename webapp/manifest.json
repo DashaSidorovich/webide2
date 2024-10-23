@@ -94,7 +94,7 @@
 					]
 				},
 				{
-					"pattern": "tHeaders/{objectId}",
+					"pattern": "Object/{objectId}",
 					"name": "object",
 					"target": [
 						"object"

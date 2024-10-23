@@ -25,7 +25,7 @@
 				id="table"
 				width="auto"
 			    growingThreshold="15"
-			
+				itemPress="onItemSelect"
 				noDataText="{worklistView>/tableNoDataText}"
 				busyIndicatorDelay="{worklistView>/tableBusyDelay}"
 				growing="true"
