@@ -106,6 +106,11 @@ sap.ui.define([
 						new sap.m.Text({
 							text: '{Created}'
 						}),
+						new sap.m.Switch({
+							state: "{= ${Version} === 'D'}",
+							type: "AcceptReject",
+							change: this.changeVersion.bind(this)
+						}),
 						new sap.m.Button({
 							type: 'Transparent',
 							icon: this.getResourceBundle().getText("iDelete"),
@@ -114,6 +119,19 @@ sap.ui.define([
 						]
 				});
 				return oTemplate;
+			},
+			
+			changeVersion(oEvent){
+				const sVersion = oEvent.getParameter('state') ? 'D' : 'A',
+				sPath = oEvent.getSource().getBindingContext().getPath();
+				console.log(sVersion);
+				console.log(sPath);
+
+				this.getModel().setProperty(sPath + '/Version', sVersion);
+				const sInfo = this.getModel().getProperty(sPath + '/Version');
+				console.log(sInfo);
+				console.log(this.getModel().getPendingChanges());
+				this.getModel().submitChanges();
 			},
 			
 			onPressDelete: function (oEvent){
@@ -194,7 +212,6 @@ sap.ui.define([
 			},
  
 			onDialogBeforeOpen: function(oEvent){
-				    console.log("Dialog beforeOpen event triggered");
 
 				const oDialog = oEvent.getSource();
 				

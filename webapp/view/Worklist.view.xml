@@ -113,6 +113,11 @@
 					</Column>
 				</columns>
 				<columns>
+					<Column id="nameColumnDeactivate" width="8%">
+						<Text text=""/>
+					</Column>
+				</columns>
+				<columns>
 					<Column id="nameColumnDelete" width="5%">
 						<Text text=""/>
 					</Column>
