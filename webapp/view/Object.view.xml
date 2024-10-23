@@ -1,22 +1,37 @@
 <mvc:View
 	controllerName="zjblessons.sidorovichApp2.controller.Object"
 	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:mvc="sap.ui.core.mvc">
 
 	<Page
 		id="page"
-		busy="{objectView>/busy}"
 		busyIndicatorDelay="{objectView>/delay}">
 
 		<customHeader>
-			<Toolbar>
-				<content>
-					<Text text='ok'/>
-				</content>
-			</Toolbar>
-		</customHeader>
+			<Bar>
+				<contentLeft>
+					<Title class="sapUiSmallMarginBegin" text="{DocumentNumber}"/>
+				</contentLeft>
+				<contentRight>
+					<Button type="Emphasized" text="{i18n>editButton}" icon="sap-icon://edit" visible="{= !${objectView>/bEditMode}}"/>
+					<Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" visible="{= ${objectView>/bEditMode}}"/>
+					<Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" visible="{= ${objectView>/bEditMode}}"/>
 
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<IconTabBar expandable="false" headerMode="Inline" selectedKey="{= ${objectView/sSelectedTab}}">
+				<items>
+					<IconTabFilter icon="sap-icon://list" key="List" text="{i18n>List}">
+						
+					</IconTabFilter>
+					<IconTabFilter  icon="sap-icon://form"  key="Form" text="{i18n>Form}">
+						
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
 
 	</Page>
 

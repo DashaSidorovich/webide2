@@ -21,7 +21,9 @@ sap.ui.define([
 	
 				var oViewModel = new JSONModel({
 						busy : true,
-						delay : 0
+						delay : 0,
+						sSelectedTab: this.getResourceBundle().getText("List"),
+						bEditMode: false
 					});
 
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
