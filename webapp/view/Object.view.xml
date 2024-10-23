@@ -10,23 +10,54 @@
 		<customHeader>
 			<Bar>
 				<contentLeft>
-					<Title class="sapUiSmallMarginBegin" text="{DocumentNumber}"/>
+					<Title class="sapUiSmallMarginBegin" 
+					text="{= ${objectView>/bEditMode} ?  ${i18n>editMode} : ${DocumentNumber}}"/>
 				</contentLeft>
 				<contentRight>
-					<Button type="Emphasized" text="{i18n>editButton}" icon="sap-icon://edit" visible="{= !${objectView>/bEditMode}}"/>
-					<Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" visible="{= ${objectView>/bEditMode}}"/>
-					<Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" visible="{= ${objectView>/bEditMode}}"/>
-
+					<Button type="Emphasized" text="{i18n>editButton}" icon="sap-icon://edit"
+				    press="onEditButtonPress" visible="{= !${objectView>/bEditMode}}"/>
+				    <Button type="Reject" text="{i18n>deleteButton}" icon="sap-icon://delete" visible="{= !${objectView>/bEditMode}}"/>
+				    <Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" visible="{= ${objectView>/bEditMode}}"/>
+				    <Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" visible="{= ${objectView>/bEditMode}}"/>
 				</contentRight>
 			</Bar>
 		</customHeader>
 		<content>
-			<IconTabBar expandable="false" headerMode="Inline" selectedKey="{= ${objectView/sSelectedTab}}">
+			<IconTabBar id="idITB" expandable="false" headerMode="Inline" selectedKey="{= ${objectView/sSelectedTab}}">
 				<items>
 					<IconTabFilter icon="sap-icon://list" key="List" text="{i18n>List}">
-						
+						<VBox visible="{= !${objectView>/bEditMode}}">
+							<CustomListItem >
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemDocumentNumber" text="{i18n>tableNameColumnTitleDocumentNumber}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<Text text="{DocumentNumber}" class="sapUiSmallMarginBottom"/>	
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemRegionText" text="{i18n>tableNameColumnTitleRegionText}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<Text text="{RegionText}" class="sapUiSmallMarginBottom"/>
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemPlantText" text="{i18n>tableNameColumnTitlePlantText}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<Text text="{PlantText}" class="sapUiSmallMarginBottom"/>
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemDescription" text="{i18n>tableNameColumnTitleDescription}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<TextArea value="{Description}" rows="3" class="sapUiSmallMarginBottom" width="50%"/>
+								</VBox>
+							</CustomListItem>
+						</VBox>
 					</IconTabFilter>
-					<IconTabFilter  icon="sap-icon://form"  key="Form" text="{i18n>Form}">
+					<IconTabFilter id="idITFForm" icon="sap-icon://form"  key="Form" text="{i18n>Form}">
 						
 					</IconTabFilter>
 				</items>

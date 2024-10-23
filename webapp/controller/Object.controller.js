@@ -32,7 +32,17 @@ sap.ui.define([
 			
 			},
 
-
+			onEditButtonPress(oEvent){
+				this._setEditMode(true);
+			},
+			
+			_setEditMode(bValue){
+				const oModel = this.getModel('objectView');
+				const oITB = this.getView().byId('idITFForm')._getIconTabHeader();
+				oITB.setBlocked(true);
+				oModel.setProperty('/bEditMode', bValue);
+			},
+			
 			onNavBack : function() {
 				var sPreviousHash = History.getInstance().getPreviousHash();
 
