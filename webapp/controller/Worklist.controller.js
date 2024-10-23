@@ -29,6 +29,7 @@ sap.ui.define([
 				this.oDatePicker = this.byId("idDatePicker");
 				oViewModel = new JSONModel({
 					sCount: '0',
+					sITBKey: 'All',
 					worklistTableTitle : this.getResourceBundle().getText("worklistTableTitle"),
 					shareOnJamTitle: this.getResourceBundle().getText("worklistTitle"),
 					shareSendEmailSubject: this.getResourceBundle().getText("shareSendEmailWorklistSubject"),
@@ -55,6 +56,7 @@ sap.ui.define([
 					path: '/zjblessons_base_Headers',
 					sorter: [new Sorter('DocumentDate', true)],
 					template: this._getTableTemplate(),
+					filters: this._getTableFilters(),
 					urlParameters: {
 						$select: 'HeaderId, DocumentNumber, DocumentDate, PlantText, RegionText, Description, Created'
 					},
@@ -62,7 +64,7 @@ sap.ui.define([
             			dataRequested: function () {
                 			this._getTableCounter(); 
             			}.bind(this) 
-        }
+        		}
 				});
 			},
 			
@@ -75,7 +77,11 @@ sap.ui.define([
 				});
 			},
 			
-			
+			_getTableFilters(){
+				const sSelectedKey = this.getModel('worklistView').getProperty('/sITBKey');
+				const filterName = this.getResourceBundle().getText("All");
+				return sSelectedKey === filterName ? [] : [new Filter('Version', FilterOperator.EQ, 'D')]
+			},
 			
 			_getTableTemplate: function(){
 				var oTemplate = new sap.m.ColumnListItem({
@@ -233,6 +239,12 @@ sap.ui.define([
 			    }
 			},
 			
+			onITHSelect(oEvent){
+				const sSelectedKey = oEvent.getParameter('key');
+				this.getModel('worklistView').setProperty('/sITBKey', sSelectedKey);
+				this._bindTable();
+				
+			},
 			onUpdateFinished : function (oEvent) {
 				var sTitle,
 					oTable = oEvent.getSource(),

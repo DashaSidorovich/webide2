@@ -4,16 +4,23 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.f.semantic">
 
-	<semantic:SemanticPage
-		id="page"
-		headerPinnable="false"
-		toggleHeaderOnTitleClick="false">
+	<Page
+		id="page">
 
-		<semantic:titleHeading>
-			<Title text="{i18n>worklistTitle}" />
-		</semantic:titleHeading>
-
-		<semantic:content>
+		
+		<customHeader>
+			<Toolbar>
+				<content>
+					<IconTabHeader selectedKey="{= ${worklistView>/sITBKey}}" select="onITHSelect">
+						<items>
+							<IconTabFilter key="All" text="{i18n>All}"/>
+							<IconTabFilter key="Deactivated" text="{i18n>Deactivated}"/>
+						</items>
+					</IconTabHeader>
+				</content>
+			</Toolbar>
+		</customHeader>
+		<content>
 			<Table
 				id="table"
 				width="auto"
@@ -38,6 +45,7 @@
 						<ToolbarSpacer />
 						<DateRangeSelection
 							id="idDateRange"
+							width="20%"
 							placeholder="{i18n>filterDocumentDatePlaceholder}"
 							value= "{
 								'type': 'sap.ui.model.type.DateInterval',
@@ -111,13 +119,11 @@
 				</columns>
 				
 			</Table>
-		</semantic:content>
+		</content>
 
-		<semantic:sendEmailAction>
-			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
-		</semantic:sendEmailAction>
+	
 
 
-	</semantic:SemanticPage>
+	</Page>
 
 </mvc:View>
