@@ -1,7 +1,8 @@
 <mvc:View
 	controllerName="zjblessons.sidorovichApp2.controller.Object"
 	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
 
 	<Page
 		id="page"
@@ -29,32 +30,73 @@
 						<VBox visible="{= !${objectView>/bEditMode}}">
 							<CustomListItem >
 								<VBox class="sapUiContentPadding">
-								<Label labelFor="itemDocumentNumber" text="{i18n>tableNameColumnTitleDocumentNumber}" 
+								<Label text="{i18n>tableNameColumnTitleDocumentNumber}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
 								<Text text="{DocumentNumber}" class="sapUiSmallMarginBottom"/>	
 								</VBox>
 							</CustomListItem>
 							<CustomListItem>
 								<VBox class="sapUiContentPadding">
-								<Label labelFor="itemRegionText" text="{i18n>tableNameColumnTitleRegionText}" 
+								<Label text="{i18n>tableNameColumnTitleRegionText}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
 								<Text text="{RegionText}" class="sapUiSmallMarginBottom"/>
 								</VBox>
 							</CustomListItem>
 							<CustomListItem>
 								<VBox class="sapUiContentPadding">
-								<Label labelFor="itemPlantText" text="{i18n>tableNameColumnTitlePlantText}" 
+								<Label text="{i18n>tableNameColumnTitlePlantText}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
 								<Text text="{PlantText}" class="sapUiSmallMarginBottom"/>
 								</VBox>
 							</CustomListItem>
 							<CustomListItem>
 								<VBox class="sapUiContentPadding">
-								<Label labelFor="itemDescription" text="{i18n>tableNameColumnTitleDescription}" 
+								<Label text="{i18n>tableNameColumnTitleDescription}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
-								<TextArea value="{Description}" rows="3" class="sapUiSmallMarginBottom" width="50%"/>
+								<Text text="{Description}" class="sapUiSmallMarginBottom" maxLines="3" width="50%"/>
 								</VBox>
 							</CustomListItem>
+						</VBox>
+						
+						<VBox visible="{= ${objectView>/bEditMode}}">
+							<CustomListItem >
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemDocumentNumberEdit" text="{i18n>tableNameColumnTitleDocumentNumber}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<Input value="{DocumentNumber}" id="itemDocumentNumberEdit" class="sapUiSmallMarginBottom"/>	
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemRegionTextEdit" text="{i18n>tableNameColumnTitleDescription}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<Select selectedKey="{RegionID}" width="50%"
+								items="{
+									path: '/zjblessons_base_Regions'
+								}">
+									<items>
+										<core:Item  key="{RegionID}" text="{RegionText}"/>
+									</items>
+								</Select>
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemPlantTextEdit" text="{i18n>tableNameColumnTitlePlantText}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<ComboBox id="idComboBox" width="50%"/>
+								</VBox>
+							</CustomListItem>
+							<CustomListItem>
+								<VBox class="sapUiContentPadding">
+								<Label labelFor="itemDescriptionEdit" text="{i18n>tableNameColumnTitleDescription}" 
+								class="sapUiSmallMarginTopBottom" design="Bold"/>
+								<TextArea value="{Description}" rows="3" id="itemDescriptionEdit" 
+								width="100%" class="sapUiSmallMarginBottom"/>
+								</VBox>
+							</CustomListItem>
+							
+							
 						</VBox>
 					</IconTabFilter>
 					<IconTabFilter id="idITFForm" icon="sap-icon://form"  key="Form" text="{i18n>Form}">

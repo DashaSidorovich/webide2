@@ -3,12 +3,14 @@ sap.ui.define([
 		"zjblessons/sidorovichApp2/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
-		"zjblessons/sidorovichApp2/model/formatter"
+		"zjblessons/sidorovichApp2/model/formatter",
+		"sap/ui/core/Fragment"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
-		formatter
+		formatter,
+		Fragment
 	) {
 		"use strict";
 
@@ -34,6 +36,40 @@ sap.ui.define([
 
 			onEditButtonPress(oEvent){
 				this._setEditMode(true);
+			},
+			
+			onBeforeRendering(){
+				this._bindTemplate();
+			},
+			
+			async _getPlantTemplate(){
+				this._pPlantParameter ??= await Fragment.load({
+					name: "zjblessons.sidorovichApp2.view.fragment.template.ComboBoxItem",
+					id: this.getView().getId(),
+					controller: this
+				}).then((oTemplate) => {
+					this.getView().addDependent(oTemplate);
+					return oTemplate;
+				})
+				
+				return this._pPlantParameter;
+			},
+			
+			async _bindTemplate(){
+				const oComboBox = this.getView().byId('idComboBox'),
+					oTemplate = await this._getPlantTemplate();
+				oComboBox.bindItems({
+					path: '/zjblessons_base_Plants',
+					template: oTemplate,
+					events: {
+						dataReceived: () => {
+							oComboBox.setBusy(false);
+						},
+						dataRequested: () => {
+							oComboBox.setBusy(true);
+						}
+					}
+				})
 			},
 			
 			_setEditMode(bValue){

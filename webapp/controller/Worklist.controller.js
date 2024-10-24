@@ -302,7 +302,7 @@ sap.ui.define([
 					var sQuery = oEvent.getParameter("query");
 
 					if (sQuery && sQuery.length > 0) {
-						aTableSearchState = [new Filter("CreatedBy", FilterOperator.Contains, sQuery)];
+						aTableSearchState = [new Filter("DocumentNumber", FilterOperator.Contains, sQuery)];
 					}
 					this._applySearch(aTableSearchState);
 				}
