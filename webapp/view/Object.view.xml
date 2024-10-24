@@ -16,15 +16,18 @@
 				</contentLeft>
 				<contentRight>
 					<Button type="Emphasized" text="{i18n>editButton}" icon="sap-icon://edit"
-				    press="onEditButtonPress" visible="{= !${objectView>/bEditMode}}"/>
-				    <Button type="Reject" text="{i18n>deleteButton}" icon="sap-icon://delete" visible="{= !${objectView>/bEditMode}}"/>
-				    <Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" visible="{= ${objectView>/bEditMode}}"/>
-				    <Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" visible="{= ${objectView>/bEditMode}}"/>
+				    press="onPressEditButton" visible="{= !${objectView>/bEditMode} &amp;&amp; ${objectView>/sSelectedTab} === ${i18n>List}}"/>
+				    <Button type="Reject" text="{i18n>deleteButton}" icon="sap-icon://delete" 
+				    press="onPressDeleteButton" visible="{= !${objectView>/bEditMode}}"/>
+				    <Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" 
+				    press="onPressSaveButton" visible="{= ${objectView>/bEditMode}}"/>
+				    <Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" 
+				    press="onPressResetButton" visible="{= ${objectView>/bEditMode}}"/>
 				</contentRight>
 			</Bar>
 		</customHeader>
 		<content>
-			<IconTabBar id="idITB" expandable="false" headerMode="Inline" selectedKey="{= ${objectView/sSelectedTab}}">
+			<IconTabBar id="idITB" select="onITBSelect" expandable="false" headerMode="Inline" selectedKey="{= ${objectView/sSelectedTab}}">
 				<items>
 					<IconTabFilter icon="sap-icon://list" key="List" text="{i18n>List}">
 						<VBox visible="{= !${objectView>/bEditMode}}">
@@ -63,14 +66,14 @@
 								<VBox class="sapUiContentPadding">
 								<Label labelFor="itemDocumentNumberEdit" text="{i18n>tableNameColumnTitleDocumentNumber}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
-								<Input value="{DocumentNumber}" id="itemDocumentNumberEdit" class="sapUiSmallMarginBottom"/>	
+								<Input value="{path: 'DocumentNumber', mode: 'TwoWay'}" id="itemDocumentNumberEdit" class="sapUiSmallMarginBottom"/>	
 								</VBox>
 							</CustomListItem>
 							<CustomListItem>
 								<VBox class="sapUiContentPadding">
 								<Label labelFor="itemRegionTextEdit" text="{i18n>tableNameColumnTitleDescription}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
-								<Select selectedKey="{RegionID}" width="50%"
+								<Select selectedKey="{path: 'RegionID', mode: 'TwoWay'}" width="50%"
 								items="{
 									path: '/zjblessons_base_Regions'
 								}">
@@ -84,7 +87,7 @@
 								<VBox class="sapUiContentPadding">
 								<Label labelFor="itemPlantTextEdit" text="{i18n>tableNameColumnTitlePlantText}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
-								<ComboBox id="idComboBox" width="50%"/>
+								<ComboBox id="idComboBox" selectedKey="{path: 'PlantID', mode: 'TwoWay'}" width="50%"/>
 								</VBox>
 							</CustomListItem>
 							<CustomListItem>

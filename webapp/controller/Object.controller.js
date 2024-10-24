@@ -33,10 +33,46 @@ sap.ui.define([
 				this.setModel(oViewModel, "objectView");
 			
 			},
-
-			onEditButtonPress(oEvent){
+			
+			onITBSelect(oEvent){
+				const sSelectedKey = oEvent.getParameter('selectedKey');
+				this.getModel('objectView').setProperty('/sSelectedTab', sSelectedKey);
+			},
+			
+			onPressEditButton(oEvent){
 				this._setEditMode(true);
 			},
+			
+			onPressDeleteButton(oEvent){
+			},
+			
+			onPressSaveButton(oEvent){
+				const oModel = this.getModel(),
+					oView = this.getView(),
+					oPendingChanges = oModel.getPendingChanges(),
+					sPath = oView.getBindingContext().getPath().slice(1);
+									console.log(oPendingChanges);
+
+					if (oPendingChanges.hasOwnProperty(sPath)){
+						oView.setBusy(true);
+						oModel.submitChanges({
+							success: () => {
+								oView.setBusy(false);
+							},
+							error: () => {
+								oView.setBusy(true);
+							}
+						});
+					}
+			
+				this._setEditMode(false);
+			},
+			
+			onPressResetButton(oEvent){
+				this._setEditMode(false);
+				this.getModel().resetChanges();
+			},
+			
 			
 			onBeforeRendering(){
 				this._bindTemplate();
@@ -75,7 +111,7 @@ sap.ui.define([
 			_setEditMode(bValue){
 				const oModel = this.getModel('objectView');
 				const oITB = this.getView().byId('idITFForm')._getIconTabHeader();
-				oITB.setBlocked(true);
+				oITB.setBlocked(bValue);
 				oModel.setProperty('/bEditMode', bValue);
 			},
 			
