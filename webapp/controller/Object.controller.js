@@ -33,7 +33,7 @@ sap.ui.define([
 				this.getRouter().getRoute("object").attachPatternMatched(this._onObjectMatched, this);
 
 				this.setModel(oViewModel, "objectView");
-			
+
 			},
 			
 			onITBSelect(oEvent){

@@ -2,7 +2,9 @@
 	controllerName="zjblessons.sidorovichApp2.controller.Object"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core">
+	xmlns:core="sap.ui.core"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
 
 	<Page
 		id="page"
@@ -71,7 +73,7 @@
 							</CustomListItem>
 							<CustomListItem>
 								<VBox class="sapUiContentPadding">
-								<Label labelFor="itemRegionTextEdit" text="{i18n>tableNameColumnTitleDescription}" 
+								<Label labelFor="itemRegionTextEdit" text="{i18n>tableNameColumnTitleRegionText}" 
 								class="sapUiSmallMarginTopBottom" design="Bold"/>
 								<Select selectedKey="{path: 'RegionID', mode: 'TwoWay'}" width="50%"
 								items="{
@@ -103,7 +105,92 @@
 						</VBox>
 					</IconTabFilter>
 					<IconTabFilter id="idITFForm" icon="sap-icon://form"  key="Form" text="{i18n>Form}">
-						
+						<VBox class="sapUiSmallMargin">
+							<f:Form id="idForm"
+								editable="true">
+								<f:layout>
+									<f:ResponsiveGridLayout
+										labelSpanXL="4"
+										labelSpanL="4"
+										labelSpanM="4"
+										labelSpanS="12"
+										adjustLabelSpan="false"
+										emptySpanXL="0"
+										emptySpanL="0"
+										emptySpanM="0"
+										emptySpanS="0"
+										columnsXL="2"
+										columnsL="2"
+										columnsM="1"
+										singleContainerFullSize="false" />
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer>
+										<f:formElements>
+											<f:FormElement label="{i18n>tableNameColumnTitleDocumentNumber}">
+												<f:fields>
+													<Text text="{DocumentNumber}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleDocumentDate}">
+												<f:fields>
+													<Text text="{DocumentDate}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitlePlantText}">
+												<f:fields>
+													<Text text="{PlantText}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleRegionText}">
+												<f:fields>
+													<Text text="{RegionText}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleDescription}">
+												<f:fields>
+													<Text text="{Description}"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+									
+									<f:FormContainer>
+										<f:formElements>
+											<f:FormElement label="{i18n>tableNameColumnTitleCreated}">
+												<f:fields>
+												<Text text="{
+												path: 'Created',
+												type: 'sap.ui.model.type.Date',
+												formatOptions: {
+													style: 'short'
+												}
+												}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleCreatedByFullName}">
+												<f:fields>
+													<Text text="{FullName}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleModified}">
+												<f:fields>
+												<Text text="{
+												path: 'Modified',
+												formatter: '.formatter.modifiedFormatter'
+												}"/>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement label="{i18n>tableNameColumnTitleModifiedByFullName}">
+												<f:fields>
+													<Text text="{ModifiedByFullName}"/>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</VBox>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>

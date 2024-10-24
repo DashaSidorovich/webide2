@@ -9,8 +9,17 @@ sap.ui.define([
 					return "";
 				}
 				return parseFloat(sValue).toFixed(2);
+			},
+			
+			modifiedFormatter(oDate){
+				
+			    const oDateFormatter = sap.ui.core.format.DateFormat.getInstance({
+			        style: 'medium' 
+			    });
+			
+			    return oDateFormatter.format(new Date(oDate));
 			}
-
+			
 		};
 
 	}
