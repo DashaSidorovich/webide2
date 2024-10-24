@@ -18,7 +18,7 @@
 					<Button type="Emphasized" text="{i18n>editButton}" icon="sap-icon://edit"
 				    press="onPressEditButton" visible="{= !${objectView>/bEditMode} &amp;&amp; ${objectView>/sSelectedTab} === ${i18n>List}}"/>
 				    <Button type="Reject" text="{i18n>deleteButton}" icon="sap-icon://delete" 
-				    press="onPressDeleteButton" visible="{= !${objectView>/bEditMode}}"/>
+				    press="onPressDeleteButton" visible="{= !${objectView>/bEditMode} &amp;&amp; ${Version} === 'D'}"/>
 				    <Button type="Emphasized" text="{i18n>saveButton}" icon="sap-icon://save" 
 				    press="onPressSaveButton" visible="{= ${objectView>/bEditMode}}"/>
 				    <Button type="Transparent" text="{i18n>cancelButton}" icon="sap-icon://reset" 

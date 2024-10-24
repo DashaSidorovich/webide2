@@ -4,13 +4,15 @@ sap.ui.define([
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
 		"zjblessons/sidorovichApp2/model/formatter",
-		"sap/ui/core/Fragment"
+		"sap/ui/core/Fragment",
+		"sap/m/MessageBox"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
 		formatter,
-		Fragment
+		Fragment,
+		MessageBox
 	) {
 		"use strict";
 
@@ -44,6 +46,27 @@ sap.ui.define([
 			},
 			
 			onPressDeleteButton(oEvent){
+				const oView = this.getView(),
+					sPath = oView.getBindingContext().getPath();
+				MessageBox.confirm(this.getResourceBundle().getText("deleteMessage"), {
+				title: this.getResourceBundle().getText("deleteConfirm"),                                    
+    			actions: [sap.m.MessageBox.Action.OK,
+            	sap.m.MessageBox.Action.CANCEL],         
+    			emphasizedAction: sap.m.MessageBox.Action.OK,
+    			onClose: function(oAction){
+					if(oAction === sap.m.MessageBox.Action.OK) {    				
+						oView.setBusy(true);
+						this.getModel().remove(sPath,
+						{
+							success: function(oData){
+							oView.setBusy(false);
+							this.onNavBack();
+							}.bind(this)
+						});
+					}
+				}.bind(this)
+				});
+					
 			},
 			
 			onPressSaveButton(oEvent){

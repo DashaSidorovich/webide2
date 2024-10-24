@@ -122,7 +122,8 @@ sap.ui.define([
 						new sap.m.Button({
 							type: 'Transparent',
 							icon: this.getResourceBundle().getText("iDelete"),
-							press: this.onPressDelete.bind(this)
+							press: this.onPressDelete.bind(this),
+							enabled: "{= ${Version} === 'D'}"
 						})
 						]
 				});
@@ -132,13 +133,9 @@ sap.ui.define([
 			changeVersion(oEvent){
 				const sVersion = oEvent.getParameter('state') ? 'D' : 'A',
 				sPath = oEvent.getSource().getBindingContext().getPath();
-				console.log(sVersion);
-				console.log(sPath);
 
 				this.getModel().setProperty(sPath + '/Version', sVersion);
 				const sInfo = this.getModel().getProperty(sPath + '/Version');
-				console.log(sInfo);
-				console.log(this.getModel().getPendingChanges());
 				this.getModel().submitChanges();
 			},
 			
@@ -149,7 +146,7 @@ sap.ui.define([
 					HeaderID: oBindingContext.getProperty('HeaderID')
 				});
 				MessageBox.confirm(this.getResourceBundle().getText("deleteMessage"), {
-				title: "Confirm",                                    
+				title: this.getResourceBundle().getText("deleteConfirm"),                                    
     			actions: [sap.m.MessageBox.Action.OK,
             	sap.m.MessageBox.Action.CANCEL],         
     			emphasizedAction: sap.m.MessageBox.Action.OK,
